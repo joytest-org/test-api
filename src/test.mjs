@@ -22,7 +22,15 @@ function addTest(label, test_fn, skip = false) {
 		context = session.current_describe_block
 	}
 
-	context.push({label, test_fn, file: session.current_file, skip})
+	const test = {
+		label,
+		test_fn,
+		file: session.current_file,
+		skip
+	}
+
+	context.push(test)
+	session.current_file_tests.push(test)
 }
 
 function test(label, test_fn) {
