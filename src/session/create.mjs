@@ -1,7 +1,7 @@
 import _getGlobalObject from "../api/_getGlobalObject.mjs"
 import getDefaultOptions from "../api/getDefaultOptions.mjs"
 
-import loadTestFile from "./_loadTestFile.mjs"
+import loadTestFile from "./methods/_loadTestFile.mjs"
 
 export default function(options = {}) {
 	const jtest = _getGlobalObject()
