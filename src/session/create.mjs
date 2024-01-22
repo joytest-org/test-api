@@ -2,6 +2,7 @@ import _getGlobalObject from "../api/_getGlobalObject.mjs"
 import getDefaultOptions from "../api/getDefaultOptions.mjs"
 
 import loadTestFile from "./methods/_loadTestFile.mjs"
+import runSingleTest from "./methods/_runSingleTest.mjs"
 
 export default function(options = {}) {
 	const jtest = _getGlobalObject()
@@ -42,6 +43,10 @@ export default function(options = {}) {
 
 	jtest.current_session.addTestFile = (test_file) => {
 		return loadTestFile(jtest.current_session, test_file)
+	}
+
+	jtest.current_session.runSingleTest = (test) => {
+		return runSingleTest(jtest.current_session, test)
 	}
 
 	return jtest.current_session

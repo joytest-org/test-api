@@ -11,5 +11,8 @@
   "exports": {
     ".": "./src/index.mjs",
     "./session": "./src/session/index.mjs"
+  },
+  "dependencies": {
+    "@anio-js-foundation/expect": "^1.0.0"
   }
 }
