@@ -1,11 +1,11 @@
 // start of section 'this is done by the runner'
-import {createSession} from "@anio-jtest/test/session"
+import {createSession} from "../../src/session/index.mjs"
 
 const session = createSession({
 	timeout: 100
 })
 // end of section 'this is done by the runner'
-import {test} from "@anio-jtest/test"
+import {test} from "../../src/index.mjs"
 
 test("", () => {
 	return new Promise((resolve) => {

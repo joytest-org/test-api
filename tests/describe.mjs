@@ -1,9 +1,9 @@
 // start of section 'this is done by the runner'
-import {createSession} from "@anio-jtest/test/session"
+import {createSession} from "../src/session/index.mjs"
 
 const session = createSession()
 // end of section 'this is done by the runner'
-import {describe, test} from "@anio-jtest/test"
+import {describe, test} from "../src/index.mjs"
 
 describe("describe block 1", () => {
 	test("test 1 within describe block 1", () => {})

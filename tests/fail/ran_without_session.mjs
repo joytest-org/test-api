@@ -1,4 +1,4 @@
-import {describe, test} from "@anio-jtest/test"
+import {describe, test} from "../../src/index.mjs"
 
 let success = false, success2 = false
 
