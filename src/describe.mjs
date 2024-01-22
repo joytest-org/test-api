@@ -18,6 +18,10 @@ export default function(label, describe_fn) {
 	session.current_describe_block = []
 	describe_fn()
 
+	if (!session.current_describe_block.length) {
+		throw new Error(`Cannot have empty describe() block.`)
+	}
+
 	session.tests.push({
 		label,
 		tests: session.current_describe_block
