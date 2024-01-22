@@ -25,8 +25,6 @@ export default function(options = {}) {
 		/* Used to keep track of the current "describe" block */
 		current_describe_block: null,
 
-		next_test_id: 0,
-
 		current_file_tests: null,
 
 		/* Used to keep track of statistical data */

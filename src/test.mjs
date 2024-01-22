@@ -1,4 +1,5 @@
 import getCurrentSession from "./session/getCurrent.mjs"
+import generateTestCaseId from "./lib/generateTestCaseId.mjs"
 
 function addTest(label, test_fn, skip = false) {
 	const session = getCurrentSession()
@@ -22,8 +23,10 @@ function addTest(label, test_fn, skip = false) {
 		context = session.current_describe_block
 	}
 
+	const test_id = generateTestCaseId()
+
 	const test = {
-		id: session.next_test_id,
+		id: test_id,
 		label,
 		test_fn,
 		file: session.current_file,
@@ -31,9 +34,10 @@ function addTest(label, test_fn, skip = false) {
 	}
 
 	context.push(test)
-	session.current_file_tests.push(test)
 
-	++session.next_test_id
+	if (session.current_file_tests !== null) {
+		session.current_file_tests.push(test)
+	}
 }
 
 function test(label, test_fn) {
