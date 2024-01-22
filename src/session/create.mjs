@@ -3,6 +3,7 @@ import getDefaultOptions from "../api/getDefaultOptions.mjs"
 
 import loadTestFile from "./methods/_loadTestFile.mjs"
 import runSingleTest from "./methods/_runSingleTest.mjs"
+import findTestById from "./methods/_findTestById.mjs"
 
 export default function(options = {}) {
 	const jtest = _getGlobalObject()
@@ -23,6 +24,8 @@ export default function(options = {}) {
 		is_processing: true,
 		/* Used to keep track of the current "describe" block */
 		current_describe_block: null,
+
+		next_test_id: 0,
 
 		current_file_tests: null,
 
@@ -49,6 +52,10 @@ export default function(options = {}) {
 
 	jtest.current_session.runSingleTest = (test) => {
 		return runSingleTest(jtest.current_session, test)
+	}
+
+	jtest.current_session.findTestById = (test_id) => {
+		return findTestById(jtest.current_session, test_id)
 	}
 
 	return jtest.current_session

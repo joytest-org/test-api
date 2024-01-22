@@ -23,6 +23,7 @@ function addTest(label, test_fn, skip = false) {
 	}
 
 	const test = {
+		id: session.next_test_id,
 		label,
 		test_fn,
 		file: session.current_file,
@@ -31,6 +32,8 @@ function addTest(label, test_fn, skip = false) {
 
 	context.push(test)
 	session.current_file_tests.push(test)
+
+	++session.next_test_id
 }
 
 function test(label, test_fn) {

@@ -15,5 +15,5 @@ export default async function(session, test_file) {
 	session.current_file = null
 	session.current_file_tests = null
 
-	return imported_tests
+	return imported_tests.map(test => test.id)
 }
