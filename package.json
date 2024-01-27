@@ -10,10 +10,9 @@
   },
   "exports": {
     ".": "./src/index.mjs",
-    "./session": "./src/session/index.mjs",
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@anio-js-foundation/expect": "^1.0.0"
+    "@anio-js-core-foundation/create-random-identifier": "^1.0.1"
   }
 }
