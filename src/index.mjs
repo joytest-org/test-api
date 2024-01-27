@@ -11,12 +11,18 @@ export function createTestSuite(referenced_from, label = null) {
 		}
 	}
 
+	const addTest = function(label, test_fn, additional) {
+		const id = createRandomIdentifier(8)
+
+		context.suite.tests.push({id, label, test_fn, ...additional})
+	}
+
 	context.test = function(label, test_fn) {
-		context.suite.tests.push({label, test_fn, skip: false})
+		return addTest(label, test_fn, {skip: false})
 	}
 
 	context.test.skip = function(label, test_fn) {
-		context.suite.tests.push({label, test_fn, skip: true})
+		return addTest(label, test_fn, {skip: true})
 	}
 
 	return context
