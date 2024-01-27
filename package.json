@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@anio-js-core-foundation/create-random-identifier": "^1.0.1",
-    "@anio-js-core-foundation/run-fn-with-timeout": "^1.0.2",
+    "@anio-js-core-foundation/run-fn-with-timeout": "^1.0.3",
     "@anio-js-foundation/expect": "^1.1.1"
   }
 }
