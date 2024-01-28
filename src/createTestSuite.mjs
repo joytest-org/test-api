@@ -72,6 +72,7 @@ export default function createTestSuite(referenced_from, label = null) {
 
 		describe_block_fn()
 		context.suite.tests.push({
+			id: `${referenced_from}#d${context.suite.next_describe_block_id}`,
 			label,
 			tests: context.suite.current_describe_block
 		})
