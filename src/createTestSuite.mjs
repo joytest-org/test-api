@@ -3,17 +3,20 @@ import runTest from "./runTest.mjs"
 
 export default function createTestSuite(referenced_from, label = null) {
 	let context = {
-		suite: {
-			// Will be the same if test suite is imported again
-			id: createRandomIdentifier(32),
-			label,
-			referenced_from,
-			tests: [],
+		internal: {
 			next_test_id: 0,
 			// starts at 1 because describe block id = 0 is global describe block
 			next_describe_block_id: 1,
 			next_test_id_inside_describe_block: 0,
 			current_describe_block: null
+		},
+
+		suite: {
+			// Will be the same if test suite is imported again
+			id: createRandomIdentifier(32),
+			label,
+			referenced_from,
+			tests: []
 		}
 	}
 
@@ -33,24 +36,24 @@ export default function createTestSuite(referenced_from, label = null) {
 			})
 		}
 
-		const is_in_describe_block = context.suite.current_describe_block !== null
+		const is_in_describe_block = context.internal.current_describe_block !== null
 
 		if (!is_in_describe_block) {
-			const id = context.suite.next_test_id
+			const id = context.internal.next_test_id
 
 			pushTest(`${referenced_from}#d0#t${id}`, context.suite.tests)
 
-			++context.suite.next_test_id
+			++context.internal.next_test_id
 
 			return
 		}
 
-		const did = context.suite.next_describe_block_id
-		const tid = context.suite.next_test_id_inside_describe_block
+		const did = context.internal.next_describe_block_id
+		const tid = context.internal.next_test_id_inside_describe_block
 
-		pushTest(`${referenced_from}#d${did}#t${tid}`, context.suite.current_describe_block)
+		pushTest(`${referenced_from}#d${did}#t${tid}`, context.internal.current_describe_block)
 
-		++context.suite.next_test_id_inside_describe_block
+		++context.internal.next_test_id_inside_describe_block
 	}
 
 	context.test = function(label, test_fn) {
@@ -62,25 +65,25 @@ export default function createTestSuite(referenced_from, label = null) {
 	}
 
 	context.describe = function(label, describe_block_fn) {
-		if (context.suite.current_describe_block !== null) {
+		if (context.internal.current_describe_block !== null) {
 			throw new Error(
 				`You are not allowed to nest describe() blocks.`
 			)
 		}
 
-		context.suite.current_describe_block = []
+		context.internal.current_describe_block = []
 
 		describe_block_fn()
 		context.suite.tests.push({
-			id: `${referenced_from}#d${context.suite.next_describe_block_id}`,
+			id: `${referenced_from}#d${context.internal.next_describe_block_id}`,
 			label,
-			tests: context.suite.current_describe_block
+			tests: context.internal.current_describe_block
 		})
 
-		context.suite.current_describe_block = null
-		context.suite.next_test_id_inside_describe_block = 0
+		context.internal.current_describe_block = null
+		context.internal.next_test_id_inside_describe_block = 0
 
-		++context.suite.next_describe_block_id
+		++context.internal.next_describe_block_id
 	}
 
 	return context
