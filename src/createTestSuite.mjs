@@ -13,7 +13,7 @@ export default function createTestSuite(referenced_from, label = null) {
 	}
 
 	const addTest = function(label, test_fn, additional) {
-		const id = createRandomIdentifier(8)
+		const id = `${referenced_from}#${context.suite.tests.length}`
 
 		context.suite.tests.push({
 			id,
