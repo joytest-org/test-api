@@ -8,14 +8,27 @@ export default function createTestSuite(referenced_from, label = null) {
 			id: createRandomIdentifier(32),
 			label,
 			referenced_from,
-			tests: []
+			tests: [],
+			next_test_id: 0,
+			current_describe_block: null
 		}
 	}
 
 	const addTest = function(label, test_fn, additional) {
-		const id = `${referenced_from}#${context.suite.tests.length}`
+		let target = context.suite.tests
+		const id = `${referenced_from}#${context.suite.next_test_id}`
 
-		context.suite.tests.push({
+		/**
+		 * When we are in a "describe" block this
+		 * variable will be set.
+		 *
+		 * Add the test to that variable instead of global tests.
+		 */
+		if (context.suite.current_describe_block !== null) {
+			target = context.suite.current_describe_block
+		}
+
+		target.push({
 			id,
 			label,
 			test_fn,
@@ -24,6 +37,13 @@ export default function createTestSuite(referenced_from, label = null) {
 			},
 			...additional
 		})
+
+		/**
+		 * Always increase the test id regardless if
+		 * we are in a describe block or not.
+		 * This makes test uniquely identifiable.
+		 */
+		++context.suite.next_test_id
 	}
 
 	context.test = function(label, test_fn) {
@@ -32,6 +52,24 @@ export default function createTestSuite(referenced_from, label = null) {
 
 	context.test.skip = function(label, test_fn) {
 		return addTest(label, test_fn, {skip: true})
+	}
+
+	context.describe = function(label, describe_block_fn) {
+		if (context.suite.current_describe_block !== null) {
+			throw new Error(
+				`You are not allowed to nest describe() blocks.`
+			)
+		}
+
+		context.suite.current_describe_block = []
+
+		describe_block_fn()
+		context.suite.tests.push({
+			label,
+			tests: context.suite.current_describe_block
+		})
+
+		context.suite.current_describe_block = null
 	}
 
 	return context
