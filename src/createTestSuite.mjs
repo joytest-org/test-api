@@ -10,40 +10,47 @@ export default function createTestSuite(referenced_from, label = null) {
 			referenced_from,
 			tests: [],
 			next_test_id: 0,
+			// starts at 1 because describe block id = 0 is global describe block
+			next_describe_block_id: 1,
+			next_test_id_inside_describe_block: 0,
 			current_describe_block: null
 		}
 	}
 
 	const addTest = function(label, test_fn, additional) {
-		let target = context.suite.tests
-		const id = `${referenced_from}#${context.suite.next_test_id}`
-
 		/**
-		 * When we are in a "describe" block this
-		 * variable will be set.
-		 *
-		 * Add the test to that variable instead of global tests.
+		 * Pushes the test to the destination array 'target'.
 		 */
-		if (context.suite.current_describe_block !== null) {
-			target = context.suite.current_describe_block
+		const pushTest = (id, target) => {
+			target.push({
+				id,
+				label,
+				test_fn,
+				run(timeout = 0) {
+					return runTest(test_fn, timeout)
+				},
+				...additional
+			})
 		}
 
-		target.push({
-			id,
-			label,
-			test_fn,
-			run(timeout = 0) {
-				return runTest(test_fn, timeout)
-			},
-			...additional
-		})
+		const is_in_describe_block = context.suite.current_describe_block !== null
 
-		/**
-		 * Always increase the test id regardless if
-		 * we are in a describe block or not.
-		 * This makes test uniquely identifiable.
-		 */
-		++context.suite.next_test_id
+		if (!is_in_describe_block) {
+			const id = context.suite.next_test_id
+
+			pushTest(`${referenced_from}#d0#t${id}`, context.suite.tests)
+
+			++context.suite.next_test_id
+
+			return
+		}
+
+		const did = context.suite.next_describe_block_id
+		const tid = context.suite.next_test_id_inside_describe_block
+
+		pushTest(`${referenced_from}#d${did}#t${tid}`, context.suite.current_describe_block)
+
+		++context.suite.next_test_id_inside_describe_block
 	}
 
 	context.test = function(label, test_fn) {
@@ -70,6 +77,9 @@ export default function createTestSuite(referenced_from, label = null) {
 		})
 
 		context.suite.current_describe_block = null
+		context.suite.next_test_id_inside_describe_block = 0
+
+		++context.suite.next_describe_block_id
 	}
 
 	return context
