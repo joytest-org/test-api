@@ -27,6 +27,7 @@ export default function createTestSuite(referenced_from, label = null) {
 		const pushTest = (id, target) => {
 			target.push({
 				id,
+				referenced_from,
 				label,
 				test_fn,
 				run(timeout = 0) {
