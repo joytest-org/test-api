@@ -12,12 +12,10 @@
     ".": "./dist/package.mjs",
     "./package.json": "./package.json"
   },
-  "dependencies": {
+  "devDependencies": {
     "@anio-js-core-foundation/create-random-identifier": "^1.0.1",
     "@anio-js-core-foundation/run-fn-with-timeout": "^1.0.3",
-    "@anio-js-foundation/expect": "^2.0.2"
-  },
-  "devDependencies": {
+    "@anio-js-foundation/expect": "^2.0.2",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "rollup": "^4.9.6"
   },
