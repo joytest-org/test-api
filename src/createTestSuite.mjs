@@ -1,7 +1,10 @@
 import createRandomIdentifier from "@anio-js-core-foundation/create-random-identifier"
 import runTest from "./runTest.mjs"
+import convertImportURLToRelativePath from "./convertImportURLToRelativePath.mjs"
 
 export default function createTestSuite(referenced_from, label = null) {
+	const relative_reference = convertImportURLToRelativePath(referenced_from)
+
 	let context = {
 		internal: {
 			next_test_id: 0,
@@ -42,7 +45,7 @@ export default function createTestSuite(referenced_from, label = null) {
 		if (!is_in_describe_block) {
 			const id = context.internal.next_test_id
 
-			pushTest(`${referenced_from}#d0#t${id}`, context.suite.tests)
+			pushTest(`${relative_reference}#d0#t${id}`, context.suite.tests)
 
 			++context.internal.next_test_id
 
@@ -52,7 +55,7 @@ export default function createTestSuite(referenced_from, label = null) {
 		const did = context.internal.next_describe_block_id
 		const tid = context.internal.next_test_id_inside_describe_block
 
-		pushTest(`${referenced_from}#d${did}#t${tid}`, context.internal.current_describe_block)
+		pushTest(`${relative_reference}#d${did}#t${tid}`, context.internal.current_describe_block)
 
 		++context.internal.next_test_id_inside_describe_block
 	}
