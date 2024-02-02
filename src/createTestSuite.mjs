@@ -90,5 +90,19 @@ export default function createTestSuite(referenced_from, label = null) {
 		++context.internal.next_describe_block_id
 	}
 
+	context.suite.findTestById = function(test_id) {
+		for (const entry of context.suite.tests) {
+			if ("tests" in entry) {
+				for (const test of entry.tests) {
+					if (test.id === test_id) return test
+				}
+			} else if (entry.id === test_id) {
+				return entry
+			}
+		}
+
+		return null
+	}
+
 	return context
 }
