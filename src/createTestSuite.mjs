@@ -69,6 +69,8 @@ export default function createTestSuite(referenced_from, label = null) {
 	}
 
 	context.describe = function(label, describe_block_fn) {
+		const relative_reference = convertImportURLToRelativePath(referenced_from)
+
 		if (context.internal.current_describe_block !== null) {
 			throw new Error(
 				`You are not allowed to nest describe() blocks.`
@@ -79,7 +81,7 @@ export default function createTestSuite(referenced_from, label = null) {
 
 		describe_block_fn()
 		context.suite.tests.push({
-			id: `${referenced_from}#d${context.internal.next_describe_block_id}`,
+			id: `${relative_reference}#d${context.internal.next_describe_block_id}`,
 			label,
 			tests: context.internal.current_describe_block
 		})
