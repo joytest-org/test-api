@@ -17,6 +17,7 @@
     "@anio-js-core-foundation/is-node": "^1.0.0",
     "@anio-js-core-foundation/node-find-nearest-file": "^1.1.0",
     "@anio-js-core-foundation/run-fn-with-timeout": "^1.0.3",
+    "@anio-js-core-foundation/strip-suffix": "^1.0.0",
     "@anio-js-foundation/expect": "^2.0.2",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "rollup": "^4.9.6"
