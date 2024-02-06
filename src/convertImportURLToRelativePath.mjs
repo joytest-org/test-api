@@ -34,9 +34,20 @@ function convertImportURLToRelativePathNode(import_url) {
 	return normalizePath(`/${relative_path}`)
 }
 
+function getDocumentLocationOrigin() {
+	// detect web worker
+	if (typeof self === "object" && typeof document === "undefined") {
+		return self.location.origin
+	} else if (typeof document === "object") {
+		return document.location.origin
+	}
+
+	throw new Error(`Cannot determine document.location.origin value.`)
+}
+
 function convertImportURLToRelativePathBrowser(import_url) {
 	let relative_path = import_url.slice(
-		(document.location.origin + "/project_files/").length
+		(getDocumentLocationOrigin() + "/project_files/").length
 	)
 
 	return normalizePath(`/${relative_path}`)
