@@ -15,6 +15,8 @@ export default function createTestSuite(referenced_from, label = null) {
 		},
 
 		suite: {
+			is_anio_jtest_test_suite: true,
+
 			// Will be the same if test suite is imported again
 			id: createRandomIdentifier(32),
 			label,
