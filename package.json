@@ -1,6 +1,6 @@
 {
   "name": "@anio-jtest/test",
-  "version": "0.14.3",
+  "version": "0.15.0",
   "description": "Test API for anio-jtest.",
   "author": "Anio Software <info@anio.software>",
   "license": "MIT",
