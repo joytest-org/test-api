@@ -34,7 +34,7 @@ export default async function runTest(test_fn, timeout = 0) {
 		execution_time: test_execution_time
 	}
 
-	if (verdict === "fail") {
+	if (ret.verdict === "fail") {
 		ret.error = error
 	}
 
