@@ -1,7 +1,6 @@
 import {createExpectationsContext} from "@anio-js-foundation/expect"
 import runFnWithTimeout from "@anio-js-core-foundation/run-fn-with-timeout"
-
-import measureExecutionTime from "./lib/measureExecutionTime.mjs"
+import measureExecutionTime from "@anio-js-core-foundation/fn-measure-execution-time"
 
 export default async function runTest(test_fn, timeout = 0) {
 	let error = null, test_execution_time = 0, test_timeout = false
