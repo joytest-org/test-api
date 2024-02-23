@@ -1,6 +1,7 @@
 import {createExpectationsContext} from "@anio-js-foundation/expect"
 import runFnWithTimeout from "@anio-js-core-foundation/run-fn-with-timeout"
 import measureExecutionTime from "@anio-js-core-foundation/fn-measure-execution-time"
+import errorObjectToString from "@anio-js-core-foundation/error-object-to-string"
 
 export default async function runTest(test_fn, timeout = 0) {
 	let error = null, test_execution_time = 0, test_timeout = false
@@ -35,7 +36,7 @@ export default async function runTest(test_fn, timeout = 0) {
 	}
 
 	if (ret.verdict === "fail") {
-		ret.error = error
+		ret.error = errorObjectToString(error)
 	}
 
 	return ret
