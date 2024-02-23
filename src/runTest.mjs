@@ -30,7 +30,7 @@ export default async function runTest(test_fn, timeout = 0) {
 	}
 
 	return {
-		result,
+		verdict: result,
 		error,
 		execution_time: test_execution_time
 	}
