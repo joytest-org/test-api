@@ -29,9 +29,14 @@ export default async function runTest(test_fn, timeout = 0) {
 		result = "pass"
 	}
 
-	return {
+	let ret = {
 		verdict: result,
-		error,
 		execution_time: test_execution_time
 	}
+
+	if (verdict === "fail") {
+		ret.error = error
+	}
+
+	return ret
 }
