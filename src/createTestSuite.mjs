@@ -35,8 +35,12 @@ export default function createTestSuite(referenced_from, label = null) {
 				referenced_from,
 				label,
 				test_fn,
-				run(timeout = 0) {
-					return runTest(test_fn, timeout)
+				//
+				// additional_information (if set)
+				// contains environment and jtest_session.
+				//
+				run(timeout = 0, additional_information = null) {
+					return runTest(test_fn, timeout, additional_information)
 				},
 				...additional
 			})
