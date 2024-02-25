@@ -42,6 +42,7 @@ export default function createTestSuite(referenced_from, label = null) {
 				run(timeout = 0, additional_information = null) {
 					return runTest(test_fn, timeout, additional_information)
 				},
+				describe_block: null,
 				...additional
 			})
 		}
@@ -86,10 +87,16 @@ export default function createTestSuite(referenced_from, label = null) {
 		context.internal.current_describe_block = []
 
 		describe_block_fn()
+
 		context.suite.tests.push({
 			id: `${relative_reference}#d${context.internal.next_describe_block_id}`,
 			label,
-			tests: context.internal.current_describe_block
+			tests: context.internal.current_describe_block.map(test => {
+				return {
+					...test,
+					describe_block: {label}
+				}
+			})
 		})
 
 		context.internal.current_describe_block = null
