@@ -8,11 +8,8 @@
     "type": "git",
     "url": "git+https://github.com/anio-jtest/test.git"
   },
-  "exports": {
-    ".": "./dist/package.mjs",
-    "./package.json": "./package.json"
-  },
-  "devDependencies": {
+  "main": "./src/index.mjs",
+  "dependencies": {
     "@anio-js-core-foundation/create-random-identifier": "^1.0.1",
     "@anio-js-core-foundation/error-object-to-string": "^1.0.0",
     "@anio-js-core-foundation/fn-measure-execution-time": "^1.0.0",
@@ -20,14 +17,6 @@
     "@anio-js-core-foundation/node-find-nearest-file": "^1.1.1",
     "@anio-js-core-foundation/run-fn-with-timeout": "^1.0.3",
     "@anio-js-core-foundation/strip-suffix": "^1.0.0",
-    "@anio-js-foundation/expect": "^2.2.0",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "rollup": "^4.12.0"
-  },
-  "scripts": {
-    "prepare": "./node_modules/.bin/rollup -c rollup.config.mjs"
-  },
-  "files": [
-    "./dist/package.mjs"
-  ]
+    "@anio-js-foundation/expect": "^2.2.0"
+  }
 }
