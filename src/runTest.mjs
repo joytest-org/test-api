@@ -1,4 +1,4 @@
-import {createExpectationsContext} from "@anio-js-foundation/expect"
+import {createExpectationsContext} from "@joytest/expect"
 import runFnWithTimeout from "@anio-js-core-foundation/run-fn-with-timeout"
 import measureExecutionTime from "@anio-js-core-foundation/fn-measure-execution-time"
 import errorObjectToString from "@anio-js-core-foundation/error-object-to-string"
