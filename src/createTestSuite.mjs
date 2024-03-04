@@ -1,4 +1,4 @@
-import createRandomIdentifier from "@anio-js-core-foundation/create-random-identifier"
+import createRandomIdentifier from "@anio-js-foundation/create-random-identifier"
 import runTest from "./runTest.mjs"
 import convertImportURLToRelativePath from "./convertImportURLToRelativePath.mjs"
 

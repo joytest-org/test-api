@@ -1,7 +1,7 @@
 import {createExpectationsContext} from "@joytest/expect"
-import runFnWithTimeout from "@anio-js-core-foundation/run-fn-with-timeout"
-import measureExecutionTime from "@anio-js-core-foundation/fn-measure-execution-time"
-import errorObjectToString from "@anio-js-core-foundation/error-object-to-string"
+import runFnWithTimeout from "@anio-js-foundation/run-fn-with-timeout"
+import measureExecutionTime from "@anio-js-foundation/fn-measure-execution-time"
+import errorObjectToString from "@anio-js-foundation/error-object-to-string"
 
 export default async function runTest(
 	test_fn,

@@ -10,13 +10,13 @@
   },
   "main": "./src/index.mjs",
   "dependencies": {
-    "@anio-js-core-foundation/create-random-identifier": "^1.0.1",
-    "@anio-js-core-foundation/error-object-to-string": "^1.0.0",
-    "@anio-js-core-foundation/fn-measure-execution-time": "^1.0.0",
-    "@anio-js-core-foundation/is-node": "^1.0.0",
-    "@anio-js-core-foundation/node-find-nearest-file": "^1.1.1",
-    "@anio-js-core-foundation/run-fn-with-timeout": "^1.0.3",
-    "@anio-js-core-foundation/strip-suffix": "^1.0.0",
-    "@joytest/expect": "^3.0.0"
+    "@anio-js-foundation/create-random-identifier": "^2.0.0",
+    "@anio-js-foundation/error-object-to-string": "^2.0.0",
+    "@anio-js-foundation/fn-measure-execution-time": "^2.0.0",
+    "@anio-js-foundation/is-node": "^2.0.0",
+    "@anio-js-foundation/run-fn-with-timeout": "^2.0.0",
+    "@anio-js-foundation/strip-suffix": "^2.0.0",
+    "@anio-node-foundation/fs-find-nearest-file-async": "^2.0.1",
+    "@joytest/expect": "^3.0.1"
   }
 }
