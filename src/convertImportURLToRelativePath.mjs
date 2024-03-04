@@ -1,14 +1,14 @@
 /**
  * This function shall convert the absolute import.meta.url
  * passed to createTestSuite into a relative path.
- * In a node context, it will use @anio-node-foundation/fs-find-nearest-file-async
+ * In a node context, it will use @anio-node-foundation/fs-find-nearest-file
  * to find package.json and assume the project root from there.
  *
  * In a browser, it is assumed that all project files are located at [url]/project_files/
  */
 import isNode from "@anio-js-foundation/is-node"
 import stripSuffix from "@anio-js-foundation/strip-suffix"
-import nodeFindNearestFileAsync from "@anio-node-foundation/fs-find-nearest-file-async"
+import nodeFindNearestFile from "@anio-node-foundation/fs-find-nearest-file"
 import normalizePath from "./lib/normalizePath.mjs"
 
 let node_modules = {}
@@ -17,7 +17,7 @@ if (isNode()) {
 	node_modules.fs = await import("node:fs")
 	node_modules.path = await import("node:path")
 	node_modules.url = await import("node:url")
-	node_modules.findNearestFile = nodeFindNearestFileAsync
+	node_modules.findNearestFile = nodeFindNearestFile
 }
 
 function convertImportURLToRelativePathNode(import_url) {
@@ -25,7 +25,7 @@ function convertImportURLToRelativePathNode(import_url) {
 	const {fileURLToPath} = url
 
 	const absolute_import_url = fs.realpathSync(fileURLToPath(import_url))
-	const project_config_path = findNearestFile(
+	const project_config_path = findNearestFile.sync(
 		"package.json", path.dirname(absolute_import_url)
 	)
 
