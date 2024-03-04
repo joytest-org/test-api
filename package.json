@@ -16,7 +16,7 @@
     "@anio-js-foundation/is-node": "^2.0.0",
     "@anio-js-foundation/run-fn-with-timeout": "^2.0.0",
     "@anio-js-foundation/strip-suffix": "^2.0.0",
-    "@anio-node-foundation/fs-find-nearest-file": "^3.0.0",
+    "@anio-node-foundation/fs-find-nearest-file": "^3.0.1",
     "@joytest/expect": "^3.0.1"
   }
 }
