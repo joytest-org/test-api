@@ -7,7 +7,7 @@
  * In a browser, it is assumed that all project files are located at [url]/project_files/
  */
 import isNode from "@anio-js-foundation/is-node"
-import stripSuffix from "@anio-js-foundation/strip-suffix"
+import stripPrefix from "@anio-js-foundation/strip-prefix"
 import nodeFindNearestFile from "@anio-node-foundation/fs-find-nearest-file"
 import normalizePath from "./lib/normalizePath.mjs"
 
@@ -55,7 +55,7 @@ function getDocumentLocationOrigin() {
 }
 
 function convertImportURLToRelativePathBrowser(import_url) {
-	let relative_path = stripSuffix(
+	let relative_path = stripPrefix(
 		import_url, `${getDocumentLocationOrigin()}/project_files/`
 	)
 
