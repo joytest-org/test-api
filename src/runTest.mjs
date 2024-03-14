@@ -27,7 +27,8 @@ export default async function runTest(
 		}
 	}
 
-	const {expect, end} = createExpectationsContext()
+	const expect_context = createExpectationsContext()
+	const {expect, end} = expect_context
 
 	try {
 		const result = await measureExecutionTime(
@@ -53,6 +54,7 @@ export default async function runTest(
 	}
 
 	let ret = {
+		made_assertions: expect_context.madeAssertions,
 		verdict: result,
 		execution_time: test_execution_time
 	}
